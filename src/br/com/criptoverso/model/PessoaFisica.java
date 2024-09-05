@@ -8,7 +8,7 @@ public class PessoaFisica extends Usuario{
         super();
     }
 
-    public PessoaFisica(int cd_usuario, int email, String senha, String nm_usuario, int nr_telefone, int nr_ddd, Endereco endereco, int nr_cpf, String dt_nascimento) {
+    public PessoaFisica(int cd_usuario, String email, String senha, String nm_usuario, int nr_telefone, int nr_ddd, Endereco endereco, int nr_cpf, String dt_nascimento) {
         super(cd_usuario, email, senha, nm_usuario, nr_telefone, nr_ddd, endereco);
         this.nr_cpf = nr_cpf;
         this.dt_nascimento = dt_nascimento;

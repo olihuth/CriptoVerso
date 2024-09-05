@@ -1,10 +1,10 @@
 package br.com.criptoverso.model;
 
-import br.com.criptoverso.model.Endereco;
+import br.com.criptoverso.model.Endereco; //why did u import this?
 
 public abstract class Usuario {
     private int cd_usuario;
-    private int email;
+    private String email;
     private String senha;
     private String nm_usuario;
     private int nr_telefone;
@@ -14,7 +14,7 @@ public abstract class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int cd_usuario, int email, String senha, String nm_usuario, int nr_telefone, int nr_ddd, Endereco endereco) {
+    public Usuario(int cd_usuario, String email, String senha, String nm_usuario, int nr_telefone, int nr_ddd, Endereco endereco) {
         this.cd_usuario = cd_usuario;
         this.email = email;
         this.senha = senha;
@@ -32,11 +32,11 @@ public abstract class Usuario {
         this.cd_usuario = cd_usuario;
     }
 
-    public int getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(int email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
