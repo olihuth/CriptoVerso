@@ -10,10 +10,10 @@ public class ContaInvestimento {
     public ContaInvestimento() {
     }
 
-    public ContaInvestimento(int cd_conta, String dt_abertura, String tp_moeda, Usuario usuario) {
+    public ContaInvestimento(int cd_conta, String dt_abertura, double saldo, String tp_moeda, Usuario usuario) {
         this.cd_conta = cd_conta;
         this.dt_abertura = dt_abertura;
-        saldo = 0;
+        this.saldo = saldo;
         this.tp_moeda = tp_moeda;
         this.usuario = usuario;
     }
@@ -58,6 +58,8 @@ public class ContaInvestimento {
         this.usuario = usuario;
     }
 
-
+    public String getResumo() {
+        return "\nCódigo da conta: " + this.getCd_conta() + "\nProprietário da conta: " + this.getUsuario().getNm_usuario() + "\nData da Abertura da Conta: " + this.getDt_abertura() + "\nSaldo: " + this.getSaldo() + "\n" + this.getTp_moeda() + "\n";
+    }
 
 }

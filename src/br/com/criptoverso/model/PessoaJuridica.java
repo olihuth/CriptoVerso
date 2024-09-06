@@ -32,6 +32,6 @@ public class PessoaJuridica extends Usuario{
 
     @Override
     public String getResumo(Endereco endereco){
-        return "ID: " + this.getCd_usuario() + "\nNome: " + this.getNm_usuario() + "\nNome Fantasia: " + this.getNm_fantasia() + "\nE-mail: " + this.getEmail() + "\nCNPJ: " + this.getNr_cnpj() + "\nSenha: " + this.getSenha() + "\nTelefone: (" + this.getNr_ddd() + ")" + this.getNr_telefone() + "\n" + endereco.getEnderecoCompleto();
+        return "\nID: " + this.getCd_usuario() + "\nNome: " + this.getNm_usuario() + "\nNome Fantasia: " + this.getNm_fantasia() + "\nE-mail: " + this.getEmail() + "\nCNPJ: " + this.getNr_cnpj() + "\nSenha: " + this.getSenha() + "\nTelefone: (" + this.getNr_ddd() + ")" + this.getNr_telefone() + "\n" + endereco.getEnderecoCompleto() + "\n";
     }
 }

@@ -40,5 +40,8 @@ public class Ativo {
         this.preco = preco;
     }
 
+    public String getResumo(){
+        return "Ativo: " + this.getNm_ativo() + "\nCódigo do Ativo: " + this.getCd_ativo() + "\nPreço: " + this.getPreco();
+    }
 
 }

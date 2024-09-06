@@ -9,14 +9,14 @@ public class Teste {
     // static int choice;
 
     public static void main(String[] args) {
-        //Cadastrar usuario
-        //Criar conta
-        //Consultar saldo
+        //Cadastrar usuario OK
+        //Criar conta OK
+        //Consultar saldo OK
         //Comprar ativo
 
         //Ativos disponíveis
         Ativo bitcoin = new Ativo(1,"Bitcoin",312824.33);
-        Ativo etherium = new Ativo(2,"Ethereum",13193.71);
+        Ativo ethereum = new Ativo(2,"Ethereum",13193.71);
 
 
 
@@ -25,7 +25,8 @@ public class Teste {
 
         //Testes
         Endereco enderecoTeste = new Endereco(0,"Brasil","SP","São Paulo",533892,"Avenida Paulista",4000);
-        PessoaFisica pfTeste = new PessoaFisica(0, "oli.huth@gmail.com", "sejfjf", "Testador", 980037464, 11, enderecoTeste, 55555555, "01/01/2000");
+        PessoaFisica pfTeste = new PessoaFisica(0, "teste.cripto@gmail.com", "sejfjf", "Testador", 980037464, 11, enderecoTeste, 55555555, "01/01/2000");
+        ContaInvestimento ciTeste = new ContaInvestimento(0,"06/09/2024",400000.00,"BRL",pfTeste);
 
         PessoaFisica pf = new PessoaFisica();
         PessoaJuridica pj = new PessoaJuridica();
@@ -34,10 +35,14 @@ public class Teste {
 
         
         do{
-            System.out.println("Bem vindo!");
+            System.out.println("\nBem vindo!");
             System.out.println("Escolha uma opção: ");
             System.out.println("1 - Cadastrar Usuario");
             System.out.println("2 - Criar Conta de Investimento");
+            System.out.println("3 - Consultar Conta de Investimento");
+            System.out.println("4 - Comprar Ativo");
+            System.out.println("9 - Testes");
+            System.out.println("\n");
 
             choice = s.nextInt();
             s.nextLine();
@@ -148,10 +153,12 @@ public class Teste {
 
                     }while(tipoUsuario != 0);
 
-
                 break;
                 case 2:
-
+                    if (pf.getNm_usuario() == null && pj.getNm_usuario() == null){ //Sem usuário criado
+                        System.out.println("Crie um usuário primeiro");
+                        break;
+                    } else if (pf.getNm_usuario() != null) { //Usuário PF criado
                     System.out.println("Digite a data de abertura da conta: ");
                     String data_abertura = s.nextLine();
                     System.out.println("Digite em qual moeda será sua conta (USD, BRL, EUR): ");
@@ -161,13 +168,85 @@ public class Teste {
                     ci.setDt_abertura(data_abertura);
                     ci.setTp_moeda(tipo_moeda);
                     ci.setSaldo(0);
-                    ci.setUsuario(pfTeste);
+                    ci.setUsuario(pf);
+                    } else { //Usuário PJ criado
+                    System.out.println("Digite a data de abertura da conta: ");
+                    String data_abertura = s.nextLine();
+                    System.out.println("Digite em qual moeda será sua conta (USD, BRL, EUR): ");
+                    String tipo_moeda = s.nextLine();
+
+                    ci.setCd_conta(1);
+                    ci.setDt_abertura(data_abertura);
+                    ci.setTp_moeda(tipo_moeda);
+                    ci.setSaldo(0);
+                    ci.setUsuario(pj);
+                    }
 
                     System.out.println("Conta criada com sucesso!!!");
 
                 break;
-                case 3:
 
+                case 3:
+                    if (ciTeste.getUsuario() == null){//alterar para verificação ci
+                        System.out.println("\n==========\nCrie uma Conta de Investimento primeiro!!\n==========\n");
+                        break;
+                    } else {
+                        System.out.println(ciTeste.getResumo());
+                    }
+                break;
+
+                case 4:
+                    if (ciTeste.getUsuario() == null){//alterar para verificação ci
+                        System.out.println("\n==========\nCrie uma Conta de Investimento primeiro!!\n==========\n");
+                        break;
+                    } else {
+                        int escolhaAtivo;
+                        do {
+                            System.out.println("\nEscolha um Ativo que deseja comprar:");
+                            System.out.println("1");
+                            System.out.println(bitcoin.getResumo());
+                            System.out.println("2");
+                            System.out.println(ethereum.getResumo());
+                            System.out.println("0 - Sair");
+
+                            escolhaAtivo = s.nextInt();
+
+                            switch (escolhaAtivo){
+                                case 1://Compra de Bitcoin
+                                    int quantidadeBitcoin;
+                                    System.out.println("Quantos Bitcoins você deseja comprar?");
+                                    quantidadeBitcoin = s.nextInt();
+                                    double valorTransacaoBTC = quantidadeBitcoin * bitcoin.getPreco();
+                                    if (valorTransacaoBTC > ciTeste.getSaldo()){
+                                        System.out.println("Saldo insuficiente para completar a transação");
+                                    } else {
+                                        Transacao compraBitcoin = new Transacao(1,"06/09/2024","Compra de Ativo",quantidadeBitcoin,ciTeste,bitcoin);
+                                        ciTeste.setSaldo(ciTeste.getSaldo()-valorTransacaoBTC);
+                                        System.out.println("Transação efetuada com sucesso!!!");
+                                    }
+                                break;
+
+                                case 2://Compra de Ethereum
+                                    int quantidadeEthereum;
+                                    System.out.println("Quantas unidades de Ethereum você deseja comprar?");
+                                    quantidadeEthereum = s.nextInt();
+                                    double valorTransacaoETH = quantidadeEthereum * ethereum.getPreco();
+                                    if (valorTransacaoETH > ciTeste.getSaldo()){
+                                        System.out.println("Saldo insuficiente para completar a transação");
+                                    } else {
+                                        Transacao compraEthereum = new Transacao(1,"06/09/2024","Compra de Ativo",quantidadeEthereum,ciTeste,ethereum);
+                                        System.out.println("Transação efetuada com sucesso!!!");
+                                    }
+                                    break;
+                            }
+
+                        } while (escolhaAtivo != 0);
+
+                    }
+                break;
+
+                case 9:
+//                    System.out.println(ciTeste.getResumo());
                 break;
             }
 
