@@ -8,6 +8,7 @@ public class Ativo {
     public Ativo() {
     }
 
+    // Cadastrar Ativo
     public Ativo(int cd_ativo, String nm_ativo, double preco) {
         this.cd_ativo = cd_ativo;
         this.nm_ativo = nm_ativo;
@@ -34,7 +35,10 @@ public class Ativo {
         return preco;
     }
 
+    //Alterar Preço
     public void setPreco(double preco) {
         this.preco = preco;
     }
+
+
 }

@@ -80,5 +80,5 @@ public abstract class Usuario {
         this.endereco = endereco;
     }
 
-    public abstract String getResumo();
+    public abstract String getResumo(Endereco endereco);
 }

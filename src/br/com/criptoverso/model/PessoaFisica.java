@@ -31,7 +31,7 @@ public class PessoaFisica extends Usuario{
     }
 
     @Override
-    public String getResumo(){
-        return "ID: " + this.getCd_usuario() + "\nNome: " + this.getNm_usuario() + "\nE-mail: " + this.getEmail() + "\nData de nascimento: " + this.getDt_nascimento() + "\nCPF: " + this.getNr_cpf() + "\nSenha: " + this.getSenha() + "\nTelefone: (" + this.getNr_ddd() + ")" + this.getNr_telefone() + "\n" + this.getEndereco();
+    public String getResumo(Endereco endereco){
+        return "ID: " + this.getCd_usuario() + "\nNome: " + this.getNm_usuario() + "\nE-mail: " + this.getEmail() + "\nData de nascimento: " + this.getDt_nascimento() + "\nCPF: " + this.getNr_cpf() + "\nSenha: " + this.getSenha() + "\nTelefone: (" + this.getNr_ddd() + ")" + this.getNr_telefone() + "\n" + endereco.getEnderecoCompleto();
     }
 }

@@ -10,10 +10,10 @@ public class ContaInvestimento {
     public ContaInvestimento() {
     }
 
-    public ContaInvestimento(int cd_conta, String dt_abertura, double saldo, String tp_moeda, Usuario usuario) {
+    public ContaInvestimento(int cd_conta, String dt_abertura, String tp_moeda, Usuario usuario) {
         this.cd_conta = cd_conta;
         this.dt_abertura = dt_abertura;
-        this.saldo = saldo;
+        saldo = 0;
         this.tp_moeda = tp_moeda;
         this.usuario = usuario;
     }
@@ -57,4 +57,7 @@ public class ContaInvestimento {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+
+
 }
