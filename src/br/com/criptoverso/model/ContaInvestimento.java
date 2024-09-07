@@ -62,4 +62,15 @@ public class ContaInvestimento {
         return "\nCódigo da conta: " + this.getCd_conta() + "\nProprietário da conta: " + this.getUsuario().getNm_usuario() + "\nData da Abertura da Conta: " + this.getDt_abertura() + "\nSaldo: " + this.getSaldo() + "\n" + this.getTp_moeda() + "\n";
     }
 
+    public boolean validaConta(int cd_conta) {
+        if(getCd_conta() == cd_conta){
+            return true;
+        } else return false;
+    }
+
+    public void addSaldo(double deposito) {
+        double novoSaldo = getSaldo() + deposito;
+        setSaldo(novoSaldo);
+    }
+
 }

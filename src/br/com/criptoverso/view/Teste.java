@@ -12,36 +12,37 @@ public class Teste {
         //Cadastrar usuario OK
         //Criar conta OK
         //Consultar saldo OK
-        //Comprar ativo
+        //Comprar ativo OK
+        //Depositar Ok
 
-        //Ativos disponíveis
+        //Ativos disponíveis 
         Ativo bitcoin = new Ativo(1,"Bitcoin",312824.33);
         Ativo ethereum = new Ativo(2,"Ethereum",13193.71);
-
 
 
         Scanner s = new Scanner(System.in);
         int choice;
 
         //Testes
-        Endereco enderecoTeste = new Endereco(0,"Brasil","SP","São Paulo",533892,"Avenida Paulista",4000);
-        PessoaFisica pfTeste = new PessoaFisica(0, "teste.cripto@gmail.com", "sejfjf", "Testador", 980037464, 11, enderecoTeste, 55555555, "01/01/2000");
-        ContaInvestimento ciTeste = new ContaInvestimento(0,"06/09/2024",400000.00,"BRL",pfTeste);
+        //Endereco enderecoTeste = new Endereco(0,"Brasil","SP","São Paulo",533892,"Avenida Paulista",4000);
+        //PessoaFisica pfTeste = new PessoaFisica(0, "teste.cripto@gmail.com", "sejfjf", "Testador", 980037464, 11, enderecoTeste, 55555555, "01/01/2000");
+        //ContaInvestimento ciTeste = new ContaInvestimento(0,"06/09/2024",400000.00,"BRL",pfTeste);
 
         PessoaFisica pf = new PessoaFisica();
         PessoaJuridica pj = new PessoaJuridica();
         ContaInvestimento ci = new ContaInvestimento();
 
 
-        
+        // MENU
         do{
-            System.out.println("\nBem vindo!");
+            System.out.println("\nBem vindo ao CriptoVerso!");
             System.out.println("Escolha uma opção: ");
-            System.out.println("1 - Cadastrar Usuario");
+            System.out.println("1 - Cadastrar Usuário");
             System.out.println("2 - Criar Conta de Investimento");
             System.out.println("3 - Consultar Conta de Investimento");
             System.out.println("4 - Comprar Ativo");
-            System.out.println("9 - Testes");
+            System.out.println("5 - Depositar");
+            System.out.println("0 - Sair");
             System.out.println("\n");
 
             choice = s.nextInt();
@@ -49,6 +50,7 @@ public class Teste {
 
 
             switch(choice){
+                // CADASTRAR USUARIO
                 case 1:
                     int tipoUsuario;
                     do{    
@@ -59,6 +61,7 @@ public class Teste {
                         tipoUsuario = s.nextInt();
                         s.nextLine();
 
+                        // CADASTRAR PESSOA FISICA
                         if (tipoUsuario == 1){
                             System.out.println("Digite o email: ");
                             String email = s.nextLine();
@@ -102,8 +105,12 @@ public class Teste {
                             pf.setDt_nascimento(dataNasc);
                             pf.setEndereco(enderecoUsuario);
 
+                            System.out.println("Usuário criado com sucesso!");
+
                             System.out.println(pf.getResumo(enderecoUsuario));
 
+
+                            // CADASTRAR PESSOA JURIDICA
                         } else if(tipoUsuario == 2){
                             System.out.println("Digite o email: ");
                             String email = s.nextLine();
@@ -147,6 +154,8 @@ public class Teste {
                             pj.setNm_fantasia(nmFantasia);
                             pj.setEndereco(enderecoUsuario);
 
+                            System.out.println("Usuário criado com sucesso!");
+
                             System.out.println(pj.getResumo(enderecoUsuario));
 
                         }
@@ -155,6 +164,7 @@ public class Teste {
 
                 break;
                 case 2:
+                // CRIAR CONTA DE INVESTIMENTO
                     if (pf.getNm_usuario() == null && pj.getNm_usuario() == null){ //Sem usuário criado
                         System.out.println("Crie um usuário primeiro");
                         break;
@@ -187,16 +197,18 @@ public class Teste {
                 break;
 
                 case 3:
-                    if (ciTeste.getUsuario() == null){//alterar para verificação ci
+                // CONSULTAR CONTA DE INVESTIMENTO
+                    if (ci.getUsuario() == null){//alterar para verificação ci
                         System.out.println("\n==========\nCrie uma Conta de Investimento primeiro!!\n==========\n");
                         break;
                     } else {
-                        System.out.println(ciTeste.getResumo());
+                        System.out.println(ci.getResumo());
                     }
                 break;
 
                 case 4:
-                    if (ciTeste.getUsuario() == null){//alterar para verificação ci
+                //COMPRAR ATIVO
+                    if (ci.getUsuario() == null){//alterar para verificação ci
                         System.out.println("\n==========\nCrie uma Conta de Investimento primeiro!!\n==========\n");
                         break;
                     } else {
@@ -217,12 +229,14 @@ public class Teste {
                                     System.out.println("Quantos Bitcoins você deseja comprar?");
                                     quantidadeBitcoin = s.nextInt();
                                     double valorTransacaoBTC = quantidadeBitcoin * bitcoin.getPreco();
-                                    if (valorTransacaoBTC > ciTeste.getSaldo()){
+                                    if (valorTransacaoBTC > ci.getSaldo()){
                                         System.out.println("Saldo insuficiente para completar a transação");
                                     } else {
-                                        Transacao compraBitcoin = new Transacao(1,"06/09/2024","Compra de Ativo",quantidadeBitcoin,ciTeste,bitcoin);
-                                        ciTeste.setSaldo(ciTeste.getSaldo()-valorTransacaoBTC);
+                                        Transacao compraBitcoin = new Transacao(1,"06/09/2024","Compra de Ativo",quantidadeBitcoin,ci,bitcoin);
+                                        ci.setSaldo(ci.getSaldo()-valorTransacaoBTC);
                                         System.out.println("Transação efetuada com sucesso!!!");
+                                        System.out.println(compraBitcoin.getResumo());
+
                                     }
                                 break;
 
@@ -231,11 +245,13 @@ public class Teste {
                                     System.out.println("Quantas unidades de Ethereum você deseja comprar?");
                                     quantidadeEthereum = s.nextInt();
                                     double valorTransacaoETH = quantidadeEthereum * ethereum.getPreco();
-                                    if (valorTransacaoETH > ciTeste.getSaldo()){
+                                    if (valorTransacaoETH > ci.getSaldo()){
                                         System.out.println("Saldo insuficiente para completar a transação");
                                     } else {
-                                        Transacao compraEthereum = new Transacao(1,"06/09/2024","Compra de Ativo",quantidadeEthereum,ciTeste,ethereum);
+                                        Transacao compraEthereum = new Transacao(1,"06/09/2024","Compra de Ativo",quantidadeEthereum,ci,ethereum);
+                                        ci.setSaldo(ci.getSaldo()-valorTransacaoETH);
                                         System.out.println("Transação efetuada com sucesso!!!");
+                                        System.out.println(compraEthereum.getResumo());
                                     }
                                     break;
                             }
@@ -244,13 +260,32 @@ public class Teste {
 
                     }
                 break;
-
-                case 9:
-//                    System.out.println(ciTeste.getResumo());
+                    // DEPOSITAR
+                case 5:
+                    if (ci.getUsuario() == null){//alterar para verificação ci
+                        System.out.println("\n==========\nCrie uma Conta de Investimento primeiro!!\n==========\n");
+                        break;
+                    } else if (pf.getNm_usuario() != null || pj.getNm_usuario() != null) { 
+                        System.out.println("Digite o número da conta em que o valor será depositado: ");
+                        boolean contaValida = ci.validaConta(s.nextInt());
+                        if(contaValida){
+                                System.out.println("Digite o valor a ser depositado: ");
+                                ci.addSaldo(s.nextDouble());
+                                System.out.println("Depositado com sucesso!");
+                                System.out.println("Saldo atual da conta: " + ci.getSaldo());
+                        } else {
+                                System.out.println("Número da conta não encontrado.");
+                                break;
+                        }
+                    }
                 break;
+
+                default: System.out.println("Digite um valor válido.");
             }
 
         } while (choice != 0);
+        System.out.println("Obrigada por utilizar a CriptoVerso! Volte Sempre!");
+        System.out.println("Programa encerrado com sucesso.");
 
         s.close();
 

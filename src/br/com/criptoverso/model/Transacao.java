@@ -67,4 +67,17 @@ public class Transacao {
     public void setAtivo(Ativo ativo) {
         this.ativo = ativo;
     }
+
+    public String getResumo() {
+        double valorTotal = this.getQuantidade() * this.getAtivo().getPreco();
+        return "\nCódigo da Transação: " + this.getCd_transacao() +
+        "\nCódigo da conta: " + this.getConta_investimento().getCd_conta() +
+         "\nProprietário da conta: " + this.getConta_investimento().getUsuario().getNm_usuario() + 
+         "\nData da Transação: " + this.getDt_transacao() + 
+         "\nTipo da Transação: " + this.getTp_transacao() + 
+         "\nDescrição do Ativo: " + this.getAtivo().getNm_ativo() +
+         "\nQuantidade de Ativos: " + this.getQuantidade() + 
+         "\nValor total: " + valorTotal +
+         "\n";
+    }
 }
