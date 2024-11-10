@@ -24,11 +24,10 @@ public class CarteiraDAO {
 
     // Método para atualizar uma carteira existente
     public void atualizarCarteira(ContaInvestimento carteira) throws SQLException {
-        String sql = "UPDATE T_Carteira SET saldo = ?, idCliente = ? WHERE idCarteira = ?";
+        String sql = "UPDATE T_Carteira SET saldo = ? WHERE idCarteira = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setDouble(1, carteira.getSaldo());
-            stmt.setInt(2, carteira.getUsuario().getCd_usuario());
-            stmt.setInt(3, carteira.getCd_conta());
+            stmt.setInt(2, carteira.getCd_conta());
             stmt.executeUpdate();
         }
     }
@@ -76,5 +75,22 @@ public class CarteiraDAO {
             }
         }
         return carteiras;
+    }
+    
+    public int getLastCd_Conta() throws SQLException {
+    	String sql = "SELECT idcarteira FROM T_CARTEIRA WHERE idcarteira = (SELECT MAX(idcarteira) FROM T_CARTEIRA)";
+    	try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            //stmt.setInt(1, idUsuario);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return  rs.getInt("idcarteira");
+                }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        throw new SQLException();
     }
 }

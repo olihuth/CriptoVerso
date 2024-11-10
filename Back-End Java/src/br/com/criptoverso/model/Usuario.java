@@ -1,7 +1,5 @@
 package br.com.criptoverso.model;
 
-import br.com.criptoverso.model.Endereco; //why did u import this?
-
 public abstract class Usuario {
     private int cd_usuario;
     private String email;

@@ -16,7 +16,7 @@ public class CofreDAO {
         String sql = "INSERT INTO T_Cofre (idCarteira, chaveCarteira) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, cofre.getCarteira().getCd_conta());
-            stmt.setInt(2, cofre.getChaveCarteira());
+            stmt.setString(2, cofre.getChaveCarteira());
             stmt.executeUpdate();
         }
     }
@@ -26,7 +26,7 @@ public class CofreDAO {
         String sql = "UPDATE T_Cofre SET idCarteira = ?, chaveCarteira = ? WHERE idCofre = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, cofre.getCarteira().getCd_conta());
-            stmt.setInt(2, cofre.getChaveCarteira());
+            stmt.setString(2, cofre.getChaveCarteira());
             stmt.setInt(3, cofre.getIdCofre());
             stmt.executeUpdate();
         }
@@ -51,7 +51,7 @@ public class CofreDAO {
                     return new Cofre(
                         rs.getInt("idCofre"),
                         rs.getInt("carteira"),
-                        rs.getInt("chaveCarteira")
+                        rs.getString("chaveCarteira")
                     );
                 }
             }
@@ -69,7 +69,7 @@ public class CofreDAO {
                 Cofre cofre = new Cofre(
                     rs.getInt("idCofre"),
                     rs.getInt("carteira"),
-                    rs.getInt("chaveCarteira")
+                    rs.getString("chaveCarteira")
                 );
                 cofres.add(cofre);
             }
