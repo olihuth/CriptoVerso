@@ -6,6 +6,7 @@ public class ContaInvestimento {
     private double saldo;
     private String tp_moeda;
     private Usuario usuario;
+    private int id_usuario;
 
     public ContaInvestimento() {
     }
@@ -21,7 +22,8 @@ public class ContaInvestimento {
     public ContaInvestimento(int cd_conta, double saldo, int usuario) {
         this.cd_conta = cd_conta;
         this.saldo = saldo;
-        usuario = this.usuario.getCd_usuario();
+        //usuario = this.usuario.getCd_usuario();
+        this.setId_usuarioCi(usuario);
     }
 
     public int getCd_conta() {
@@ -65,7 +67,8 @@ public class ContaInvestimento {
     }
 
     public String getResumo() {
-        return "\nCódigo da conta: " + this.getCd_conta() + "\nProprietário da conta: " + this.getUsuario().getNm_usuario() + "\nData da Abertura da Conta: " + this.getDt_abertura() + "\nSaldo: " + this.getSaldo() + "\n" + this.getTp_moeda() + "\n";
+        //return "\nCódigo da conta: " + this.getCd_conta() + "\nProprietário da conta: " + this.getUsuario().getNm_usuario() + "\nData da Abertura da Conta: " + this.getDt_abertura() + "\nSaldo: " + this.getSaldo() + "\n" + this.getTp_moeda() + "\n";
+    	return "\nCódigo da conta: " + this.getCd_conta() + "\nSaldo: " + this.getSaldo();
     }
 
     public boolean validaConta(int cd_conta) {
@@ -78,5 +81,13 @@ public class ContaInvestimento {
         double novoSaldo = getSaldo() + deposito;
         setSaldo(novoSaldo);
     }
+
+	public int getId_usuarioCi() {
+		return id_usuario;
+	}
+
+	public void setId_usuarioCi(int id_usuario) {
+		this.id_usuario = id_usuario;
+	}
 
 }

@@ -3,23 +3,23 @@ package br.com.criptoverso.model;
 public class Cofre {
     private int idCofre;
     private ContaInvestimento carteira;
-    private int chaveCarteira;
+    private String chaveCarteira;
 
     // Construtor completo
-    public Cofre(int idCofre, ContaInvestimento carteira, int chaveCarteira) {
+    public Cofre(int idCofre, ContaInvestimento carteira, String chaveCarteira) {
         this.idCofre = idCofre;
         this.carteira = carteira;
         this.chaveCarteira = chaveCarteira;
     }
     
-    public Cofre(int idCofre, int carteira, int chaveCarteira) {
+    public Cofre(int idCofre, int carteira, String chaveCarteira) {
         this.idCofre = idCofre;
         carteira = this.carteira.getCd_conta();
         this.chaveCarteira = chaveCarteira;
     }
 
     // Construtor sem idCofre (para inserção)
-    public Cofre(ContaInvestimento carteira, int chaveCarteira) {
+    public Cofre(ContaInvestimento carteira, String chaveCarteira) {
         this.carteira = carteira;
         this.chaveCarteira = chaveCarteira;
     }
@@ -33,11 +33,11 @@ public class Cofre {
         this.idCofre = idCofre;
     }
 
-    public int getChaveCarteira() {
+    public String getChaveCarteira() {
         return chaveCarteira;
     }
 
-    public void setChaveCarteira(int chaveCarteira) {
+    public void setChaveCarteira(String chaveCarteira) {
         this.chaveCarteira = chaveCarteira;
     }
 
